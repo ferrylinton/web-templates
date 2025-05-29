@@ -1,0 +1,36 @@
+{
+	"name": "web-templates",
+	"version": "1.0.0",
+	"description": "Web Templates",
+	"keywords": [
+		"html",
+		"css",
+		"template"
+	],
+	"author": "ferrylinton",
+	"license": "ISC",
+	"main": "index.js",
+	"scripts": {
+		"dev": "webpack serve",
+		"build": "webpack build --mode=production",
+		"format": "prettier . --write",
+		"start": "npx serve -p 8181 -s dist"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "npx pretty-quick --staged"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.27.3",
+		"@babel/preset-env": "^7.27.2",
+		"babel-loader": "^10.0.0",
+		"css-loader": "^7.1.2",
+		"handlebars": "^4.7.8",
+		"html-bundler-webpack-plugin": "^4.20.2",
+		"prettier": "3.5.3",
+		"pretty-quick": "^4.1.1",
+		"simple-git-hooks": "^2.13.0",
+		"webpack": "^5.99.9",
+		"webpack-cli": "^6.0.1",
+		"webpack-dev-server": "^5.2.1"
+	}
+}

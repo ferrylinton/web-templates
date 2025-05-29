@@ -1,0 +1,236 @@
+:root {
+	--spacing: 0.25rem;
+	--base1-h: 210;
+	--base1-s: 15%;
+	--base2-h: 210;
+	--base2-s: 5%;
+
+	--primary1-h: 200;
+	--primary1-s: 90%;
+	--primary2-h: 230;
+	--primary2-s: 90%;
+
+	--danger1-h: 0;
+	--danger1-s: 80%;
+	--danger2-h: 5;
+	--danger2-s: 90%;
+
+	--text: hsl(var(--base1-h), var(--base1-s), 0%);
+}
+
+a {
+	text-decoration: none;
+	color: currentColor;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--text);
+}
+
+.page-box {
+	width: 100%;
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	padding: 1rem 0;
+}
+
+.page-title {
+	width: 100%;
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.btn {
+	background-image: linear-gradient(var(--btn-bg1), var(--btn-bg2));
+	color: var(--btn-color);
+
+	min-width: 100px;
+	padding: 0.5rem 0;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	letter-spacing: 1px;
+	font-weight: 500;
+	border: 0;
+	border-radius: 0.2rem;
+	box-sizing: border-box;
+	cursor: pointer;
+	transition:
+		color 0.15s ease-in-out,
+		background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+	box-shadow: rgba(0, 0, 0, 0.3) 0 5px 15px;
+}
+
+.btn-secondary {
+	--btn-bg1: hsl(var(--base1-h), var(--base1-s), 70%);
+	--btn-bg2: hsl(var(--base2-h), var(--base2-s), 60%);
+	--btn-color: hsl(var(--base1-h), var(--base1-s), 90%);
+
+	&:hover {
+		--btn-bg1: hsl(var(--base1-h), var(--base1-s), 65%);
+		--btn-bg2: hsl(var(--base2-h), var(--base2-s), 55%);
+		--btn-color: hsl(var(--base1-h), var(--base1-s), 100%);
+	}
+}
+
+.btn.btn-primary {
+	--btn-bg1: hsl(var(--primary1-h), var(--primary1-s), 50%);
+	--btn-bg2: hsl(var(--primary2-h), var(--primary2-s), 50%);
+	--btn-color: hsl(var(--primary1-h), var(--primary1-s), 90%);
+
+	&:hover {
+		--btn-bg1: hsl(var(--primary1-h), var(--primary1-s), 45%);
+		--btn-bg2: hsl(var(--primary2-h), var(--primary2-s), 45%);
+		--btn-color: hsl(var(--primary1-h), var(--primary1-s), 100%);
+	}
+}
+
+.btn.btn-danger {
+	--btn-bg1: hsl(var(--danger1-h), var(--danger1-s), 70%);
+	--btn-bg2: hsl(var(--danger2-h), var(--danger2-s), 50%);
+	--btn-color: hsl(var(--danger1-h), var(--danger1-s), 90%);
+
+	&:hover {
+		--btn-bg1: hsl(var(--danger1-h), var(--danger1-s), 65%);
+		--btn-bg2: hsl(var(--danger2-h), var(--danger2-s), 45%);
+		--btn-color: hsl(var(--danger1-h), var(--danger1-s), 100%);
+	}
+}
+
+.form-input {
+	--input-border: hsl(var(--base1-h), var(--base1-s), 75%);
+	--input-placeholder: hsl(var(--base1-h), var(--base1-s), 90%);
+	--input-focus-border: hsl(var(--primary1-h), var(--primary1-s), 45%);
+	--input-focus-outline: hsl(var(--primary1-h), var(--primary1-s), 70%, 0.3);
+	--primary: hsl(var(--primary1-h), var(--primary1-s), 45%);
+}
+
+.create-form {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	gap: 0.5rem;
+
+	& input {
+		height: 45px;
+		flex-grow: 1;
+	}
+
+	& button {
+		height: 45px;
+		width: 100px;
+	}
+}
+
+.form-input {
+	border-radius: 0.2rem;
+	padding: 0.2rem 0.5rem;
+	border: solid 1px var(--input-border);
+
+	&::placeholder {
+		color: var(--input-placeholder);
+	}
+
+	&:focus {
+		border: solid 1px var(--input-focus-border);
+		outline: 4px solid var(--input-focus-outline);
+	}
+}
+
+.todo-list-wrapper,
+.todo-detail-wrapper {
+	--border: hsl(var(--base1-h), var(--base1-s), 75%);
+	--input-focus-border: hsl(var(--primary1-h), var(--primary1-s), 45%);
+	--input-focus-outline: hsl(var(--primary1-h), var(--primary1-s), 70%, 0.3);
+	--primary: hsl(var(--primary1-h), var(--primary1-s), 45%);
+}
+
+.empty-data {
+	--border: hsl(var(--base1-h), var(--base1-s), 75%);
+
+	border: solid 1px var(--border);
+	text-align: center;
+	padding: 1rem;
+	border-radius: 0.2rem;
+}
+
+.todo-list-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	& ul {
+		display: flex;
+		flex-direction: column;
+
+		& li {
+			display: flex;
+			align-items: center;
+			height: 50px;
+			gap: 1rem;
+			border-bottom: solid 1px var(--border);
+
+			& span {
+				flex-grow: 1;
+			}
+
+			& .form-checkbox {
+				width: 24px;
+				height: 25px;
+				accent-color: var(--primary);
+				border-radius: 0.2rem;
+				padding: 0.2rem 0.5rem;
+				border: solid 1px var(--border);
+
+				&:focus {
+					border: solid 1px var(--input-focus-border);
+					outline: 4px solid var(--input-focus-outline);
+				}
+			}
+
+			& a {
+				width: 60px;
+				border: solid 1px var(--border);
+				font-size: 0.85rem;
+				text-transform: uppercase;
+				text-align: center;
+				border-radius: 0.2rem;
+				padding: 0.2rem 0;
+				cursor: pointer;
+
+				&:hover {
+					color: var(--primary);
+					border: solid 1px var(--primary);
+				}
+			}
+		}
+	}
+}
+
+.todo-detail-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+
+	& table {
+		width: 100%;
+
+		& tr {
+			height: 40px;
+			border-bottom: solid 1px var(--border);
+		}
+
+		& th {
+			width: 150px;
+			text-align: left;
+			padding-right: 1rem;
+		}
+	}
+}
