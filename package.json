@@ -11,8 +11,8 @@
 	"license": "ISC",
 	"main": "index.js",
 	"scripts": {
-		"dev": "webpack serve",
-		"build": "webpack build --mode=production",
+		"dev": "rimraf dist && webpack serve",
+		"build": "rimraf dist && webpack build --mode=production",
 		"format": "prettier . --write",
 		"start": "npx serve -p 8181 -s dist"
 	},
@@ -28,6 +28,7 @@
 		"html-bundler-webpack-plugin": "^4.20.2",
 		"prettier": "3.5.3",
 		"pretty-quick": "^4.1.1",
+		"rimraf": "^6.0.1",
 		"simple-git-hooks": "^2.13.0",
 		"webpack": "^5.99.9",
 		"webpack-cli": "^6.0.1",
