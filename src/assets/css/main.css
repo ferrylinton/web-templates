@@ -1,0 +1,354 @@
+:root {
+	--sidebar-width: 300px;
+
+	--spacing: 0.25rem;
+	--base1-h: 210;
+	--base1-s: 15%;
+	--base2-h: 210;
+	--base2-s: 5%;
+
+	--primary1-h: 200;
+	--primary1-s: 90%;
+	--primary2-h: 230;
+	--primary2-s: 90%;
+
+	--danger1-h: 0;
+	--danger1-s: 80%;
+	--danger2-h: 5;
+	--danger2-s: 90%;
+
+	--text: hsl(var(--base1-h), var(--base1-s), 0%);
+	--light-text: hsl(var(--base1-h), var(--base1-s), 40%);
+	--bg: hsl(var(--base1-h), var(--base1-s), 100%);
+	--light-bg: hsl(var(--base1-h), var(--base1-s), 95%);
+	--border: hsl(var(--base1-h), var(--base1-s), 85%);
+	--placeholder: hsl(var(--base1-h), var(--base1-s), 90%);
+	--primary-outline: hsl(var(--primary1-h), var(--primary1-s), 70%, 0.3);
+	--primary: hsl(var(--primary1-h), var(--primary1-s), 35%);
+	--darker-primary: hsl(var(--primary1-h), var(--primary1-s), 30%);
+	--light-primary: hsl(var(--primary1-h), var(--primary1-s), 90%);
+	--overlay-bg: hsl(var(--base1-h), var(--base1-s), 0%, 0.1);
+}
+
+body {
+	width: 100%;
+	min-width: 380px;
+	min-height: 100dvh;
+	position: relative;
+	display: flex;
+	color: var(--text);
+	background-color: var(--bg);
+}
+
+a:hover {
+	color: var(--primary);
+}
+
+svg {
+	width: 24px;
+	height: auto;
+	fill: currentColor;
+}
+
+.navbar {
+	width: 100%;
+	height: 50px;
+	display: flex;
+	justify-items: center;
+	border-bottom: solid 1px var(--border);
+}
+
+.navbar .btn-menu {
+	width: 50px;
+	height: 50px;
+}
+
+.toggle-menu {
+	position: fixed;
+	width: 50px;
+	height: 50px;
+	z-index: 199;
+	top: 10px;
+	left: 10px;
+	border-radius: 0.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--light-bg);
+	backdrop-filter: blur(20px);
+}
+
+.toggle-menu:hover {
+	color: var(--primary);
+	background-color: var(--light-primary);
+}
+
+.toggle-menu svg {
+	width: 40px;
+	height: auto;
+}
+
+.sidebar {
+	flex: none;
+	min-width: var(--sidebar-width);
+	width: var(--sidebar-width);
+	overflow: auto;
+	position: fixed;
+	z-index: 200;
+	top: 0;
+	bottom: 0;
+	left: -100px;
+	transition: all 0.3s ease-in-out;
+	visibility: hidden;
+	opacity: 0;
+	background-color: var(--light-bg);
+	border-right: solid 1px var(--border);
+}
+
+.overlay {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100dvh;
+	background-color: var(--overlay-bg);
+	z-index: 100;
+}
+
+.sidebar-active .sidebar {
+	visibility: visible;
+	opacity: 1;
+	transform: translateX(100px) translateY(0);
+}
+
+.sidebar-active .overlay {
+	display: block;
+}
+
+.sidebar header {
+	padding: 1rem 0;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.6rem;
+}
+
+.sidebar header button {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	width: 50px;
+	height: 50px;
+	border-radius: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sidebar header button:hover {
+	color: var(--primary);
+	background-color: var(--light-primary);
+}
+
+.sidebar header button svg {
+	width: 30px;
+	height: 30px;
+}
+
+.sidebar header h1 svg {
+	width: 80px;
+	height: auto;
+}
+
+.sidebar header h2 {
+	font-size: 1.4rem;
+	line-height: 1;
+}
+
+.sidebar-menu {
+	padding: 1rem;
+}
+
+.sidebar-menu li a {
+	display: block;
+	height: 38px;
+	line-height: 38px;
+	text-transform: uppercase;
+	text-align: center;
+	font-size: 1rem;
+	border-radius: 0.2rem;
+	margin-bottom: 0.2rem;
+	border: solid 1px var(--border);
+	color: var(--light-text);
+}
+
+.sidebar-menu li a:hover {
+	color: var(--darker-primary);
+	border: solid 1px var(--primary);
+	background-color: var(--light-primary);
+}
+
+@media (min-width: 1024px) {
+	.sidebar,
+	.sidebar-active .sidebar {
+		transition: none;
+		transform: translateX(0) translateY(0);
+		position: static;
+		visibility: visible;
+		opacity: 1;
+	}
+
+	.overlay,
+	.toggle-menu,
+	.sidebar header button {
+		display: none;
+	}
+}
+
+main {
+	width: 100%;
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+}
+
+.container.center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+}
+
+.home h1 {
+	font-size: 2rem;
+	font-weight: bold;
+	line-height: 1;
+}
+
+.home h2,
+.home h3 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	line-height: 1;
+}
+
+.home h2 svg {
+	width: 20px;
+	height: 20px;
+}
+
+.home h2 a {
+	font-size: 1.2;
+	text-transform: uppercase;
+}
+
+.home h3 svg {
+	width: 20px;
+	height: 20px;
+}
+
+.home h3 a {
+	font-size: 1.5rem;
+	font-weight: 600;
+}
+
+.detail-header {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 70px;
+}
+
+.detail-indicators {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	align-items: center;
+}
+
+.detail-indicators button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50px;
+	border: solid 1px var(--border);
+	color: var(--light-text);
+	background-color: var(--bg);
+}
+
+.detail-indicators button:hover,
+.detail-indicators section button.selected {
+	border: solid 1px var(--primary);
+	color: var(--darker-primary);
+	background-color: var(--light-primary);
+}
+
+.detail-indicators button svg {
+	width: 25px;
+	height: 25px;
+}
+
+.detail-indicators section {
+	display: flex;
+	gap: 0.5rem;
+}
+
+.detail-header h1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+	text-transform: uppercase;
+	font-size: 1.5rem;
+	line-height: 1;
+}
+
+.detail-header a.download {
+	padding: 0.4rem 1.5rem;
+	border-radius: 60px;
+	text-transform: uppercase;
+	border: solid 1px var(--border);
+	color: var(--light-text);
+	background-color: var(--bg);
+}
+
+.detail-header a.download:hover {
+	border: solid 1px var(--primary);
+	color: var(--darker-primary);
+	background-color: var(--light-primary);
+}
+
+.detail-preview {
+	flex-grow: 1;
+	display: flex;
+	padding: 1rem;
+}
+
+.detail-preview iframe {
+	flex-grow: 1;
+	height: 100%;
+	overflow: hidden;
+	border: solid 1px var(--border);
+	border-radius: 0.2rem;
+}

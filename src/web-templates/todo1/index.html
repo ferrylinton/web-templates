@@ -4,8 +4,8 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Todo1</title>
-		<link href="@src/todo1/css/normalize.css" rel="stylesheet" />
-		<link href="@src/todo1/css/main.css" rel="stylesheet" />
+		<link href="css/normalize.css" rel="stylesheet" />
+		<link href="css/main.css" rel="stylesheet" />
 	</head>
 
 	<body>
@@ -23,9 +23,26 @@
 				<button type="submit" class="btn btn-primary">CREATE</button>
 			</form>
 			<div class="todo-list-wrapper">
-				<div class="empty-data">Empty Data</div>
+				<ul>
+					<li>
+						<input class="form-checkbox" type="checkbox" name="isDone" value="1" />
+						<span>Test 1</span>
+						<a href="detail.html" data-discover="true">Detail</a>
+					</li>
+					<li>
+						<input
+							class="form-checkbox"
+							type="checkbox"
+							name="isDone"
+							value="2"
+							checked
+						/>
+						<span>Test 2</span>
+						<a href="detail.html" data-discover="true">Detail</a>
+					</li>
+				</ul>
 			</div>
 		</div>
-		<script src="@src/todo1/js/main.js" defer="defer"></script>
+		<script src="js/main.js" defer="defer"></script>
 	</body>
 </html>

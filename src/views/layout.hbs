@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Web Templates</title>
+    <meta name="description" content="Simple HTML, CSS Template">
+    <meta name="author" content="Ferry L. H.">
+    <link href="/favicon.ico" rel="icon" />
+    <link href="/assets/css/normalize.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <button type="button" class="toggle-menu" onclick="toggleSidebar()">
+        {{> menu-icon}}
+    </button>
+    <aside class="sidebar">
+        <header>
+            <h1>
+                {{> logo-icon}}
+            </h1>
+            <h2>Web Templates</h2>
+            
+            <button type="button" onclick="toggleSidebar()">
+                {{> close-icon}}
+            </button>
+        </header>
+        <section>
+            <ul class="sidebar-menu">
+                {{#each folders}}
+                <li>
+                    <a href="/detail/{{this}}">{{this}}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </section>
+    </aside>
+    <main>
+        {{{body}}}
+    </main>
+    <div class="overlay" onclick="toggleSidebar()"></div>
+    <script src="/assets/js/main.js" defer="defer"></script>
+</body>
+
+</html>

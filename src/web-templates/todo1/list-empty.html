@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Todo1</title>
+		<link href="css/normalize.css" rel="stylesheet" />
+		<link href="css/main.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<div class="page-wrapper">
+			<h1>TODO</h1>
+			<form novalidate autocomplete="off" class="create-form" action="" method="post">
+				<input
+					class="form-input"
+					maxlength="50"
+					placeholder="Add a task"
+					autocomplete="off"
+					name="task"
+				/>
+
+				<button type="submit" class="btn btn-primary">CREATE</button>
+			</form>
+			<div class="todo-list-wrapper">
+				<div class="empty-data">Empty Data</div>
+			</div>
+		</div>
+		<script src="js/main.js" defer="defer"></script>
+	</body>
+</html>

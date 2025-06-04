@@ -10,11 +10,11 @@
 	"author": "ferrylinton",
 	"license": "ISC",
 	"main": "index.js",
+	"type": "commonjs",
 	"scripts": {
-		"dev": "rimraf dist && webpack serve",
-		"build": "rimraf dist && webpack build --mode=production",
+		"dev": "cross-env NODE_ENV=development nodemon index.js",
 		"format": "prettier . --write",
-		"start": "npx serve -p 8181 -s dist"
+		"start": "cross-env NODE_ENV=production node index.js"
 	},
 	"simple-git-hooks": {
 		"pre-commit": "npx pretty-quick --staged"
@@ -26,6 +26,7 @@
 		"css-loader": "^7.1.2",
 		"handlebars": "^4.7.8",
 		"html-bundler-webpack-plugin": "^4.20.2",
+		"nodemon": "^3.1.10",
 		"prettier": "3.5.3",
 		"pretty-quick": "^4.1.1",
 		"rimraf": "^6.0.1",
@@ -33,5 +34,14 @@
 		"webpack": "^5.99.9",
 		"webpack-cli": "^6.0.1",
 		"webpack-dev-server": "^5.2.1"
+	},
+	"dependencies": {
+		"archiver": "^7.0.1",
+		"cors": "^2.8.5",
+		"cross-env": "^7.0.3",
+		"dotenv": "^16.5.0",
+		"express": "^5.1.0",
+		"express-favicon": "^2.0.4",
+		"express-handlebars": "^8.0.1"
 	}
 }

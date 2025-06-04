@@ -1,0 +1,25 @@
+<div class="detail-header">
+    <h1>
+        <a href="/">{{> home-icon}}</a>
+        <span>{{name}}</span>
+    </h1>
+    <a href="/download/{{name}}" class="download">Download</a>
+</div>
+<div class="detail-indicators">
+    <button type="button" data-type="navigation" onclick="selectIndicator('previous')">
+        {{>previous-icon}}
+    </button>
+    <section id="indicators">
+        {{#each files}}
+        <button data-index="{{index}}" data-url="{{url}}" onclick="selectIndicator('{{url}}', {{index}})">
+            {{add index 1 }}
+        </button>
+        {{/each}}
+    </section>
+    <button type="button" data-type="navigation" onclick="selectIndicator('next')">
+        {{> next-icon}}
+    </button>
+</div>
+<div class="detail-preview">
+    <iframe id="preview" src="{{selected.url}}"></iframe>
+</div>
