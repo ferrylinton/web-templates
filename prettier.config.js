@@ -15,4 +15,4 @@ const config = {
 	arrowParens: 'avoid',
 };
 
-export default config;
+module.exports = config;
