@@ -1,3 +1,4 @@
+{{#if files}}
 <div class="detail-header">
     <h1>
         <a href="/">{{> home-icon}}</a>
@@ -20,6 +21,29 @@
         {{> next-icon}}
     </button>
 </div>
-<div class="detail-preview">
-    <iframe id="preview" src="{{selected.url}}"></iframe>
+<div class="detail-preview-wrapper">
+    <div class="detail-preview">
+        <div class="toolbar">
+            <h5 id="toolbar-url">{{selected.url}}</h5>
+            <div class="toolbar-menu">
+                {{> circle-icon}}
+                {{> circle-icon}}
+                {{> circle-icon}}
+            </div>
+        </div>
+        <iframe id="preview" src="{{selected.url}}"></iframe>
+    </div>
 </div>
+{{else}}
+<div class="detail-header">
+    <h1>
+        <a href="/">{{> home-icon}}</a>
+        <span>{{name}}</span>
+    </h1>
+</div>
+<div class="detail-preview">
+    <div class="detail-message">
+        <p>{{message}}</p>
+    </div>
+</div>
+{{/if}}

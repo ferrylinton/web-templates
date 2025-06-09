@@ -4,6 +4,7 @@ const favicon = require('express-favicon');
 const { create } = require('express-handlebars');
 const homeRouter = require('./routers/home-router');
 const { WEB_TEMPLATE_PATH } = require('./configs/constant');
+const { getWebTemplateFolders, getDirTree } = require('./services/file-service');
 
 const VIEWS_FOLDER = path.join(__dirname, 'views');
 
@@ -16,6 +17,14 @@ const handlebars = create({
 	helpers: {
 		add: function (num1, num2) {
 			return num1 + num2;
+		},
+
+		templates: function (options) {
+			options.data.root['templates'] = getWebTemplateFolders();
+		},
+
+		tree: function (options) {
+			options.data.root['tree'] = getDirTree();
 		},
 	},
 });
@@ -46,13 +55,13 @@ app.use('/', homeRouter);
 
 // 404 / not found handler
 app.use((_req, res, _next) => {
-	res.status(404).json({ message: 'Not Found' });
+	res.render('not-found');
 });
 
 // error handler
 app.use((err, _req, res, _next) => {
-	res.status(err.status || 500);
-	return res.json({ message: err.message || 'Internal Server Error' });
+	console.error(err);
+	res.render('error');
 });
 
 module.exports = app;

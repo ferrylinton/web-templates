@@ -8,6 +8,7 @@
     <meta name="author" content="Ferry L. H.">
     <link href="/favicon.ico" rel="icon" />
     <link href="/assets/css/normalize.css" rel="stylesheet" />
+    <link href="/assets/css/github.css" rel="stylesheet" />
     <link href="/assets/css/main.css" rel="stylesheet" />
 </head>
 
@@ -21,19 +22,26 @@
                 {{> logo-icon}}
             </h1>
             <h2>Web Templates</h2>
-            
+
             <button type="button" onclick="toggleSidebar()">
                 {{> close-icon}}
             </button>
         </header>
         <section>
-            <ul class="sidebar-menu">
-                {{#each folders}}
+            {{templates }}
+            <ul id="sidebar-menu">
+                {{#each templates}}
                 <li>
-                    <a href="/detail/{{this}}">{{this}}</a>
+                    <a href="/detail/{{templateName}}" class="folder">{{templateName}}</a>
+                    <ul>
+                        {{#each files}}
+                        <li><a href="/detail/{{../templateName}}{{relativePath}}" class="file">{{relativePath}}</a></li>
+                        {{/each}}
+                    </ul>
                 </li>
                 {{/each}}
             </ul>
+
         </section>
     </aside>
     <main>

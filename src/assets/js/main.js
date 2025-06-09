@@ -1,6 +1,18 @@
 window.onload = function () {
 	setSelectedIndicator();
+	initSidebarMenu();
 };
+
+function initSidebarMenu() {
+	const menus = document.querySelectorAll('#sidebar-menu li a');
+
+	for (let i = 0; i < menus.length; i++) {
+		console.log(menus[i].href);
+		if (menus[i].href.endsWith(window.location.pathname)) {
+			menus[i].classList.add('selected');
+		}
+	}
+}
 
 function toggleSidebar() {
 	document.body.classList.toggle('sidebar-active');
