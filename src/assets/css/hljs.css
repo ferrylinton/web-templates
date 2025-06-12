@@ -1,0 +1,117 @@
+.hljs {
+	font-size: 0.8rem;
+	line-height: 1.2;
+	overflow: auto;
+}
+
+.hljs h1,
+.hljs h2,
+.hljs h3,
+.hljs h4,
+.hljs h5 {
+	word-wrap: break-word;
+	line-height: 1;
+}
+
+.hljs h1 {
+	font-size: 2rem;
+	font-weight: bold;
+	display: block;
+	text-align: center;
+	padding: 1rem 0.5rem 2rem 0.5rem;
+	font-family: 'Archivo Black', serif;
+	font-weight: 400;
+	font-style: normal;
+	letter-spacing: -1px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-shadow:
+		2px 8px 6px rgba(0, 0, 0, 0.2),
+		0px -5px 35px rgba(255, 255, 255, 0.3);
+}
+
+.hljs h2 {
+	font-size: 1.3rem;
+	font-weight: bold;
+	margin: 1rem 0;
+}
+
+.hljs h3 {
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin: 1rem 0;
+}
+
+.hljs ::marker {
+	content: counters(list-item, '.') '.';
+	font-size: 0.85rem;
+}
+
+.hljs a {
+	color: var(--text);
+	font-weight: 400;
+
+	&:hover {
+		color: var(--primary);
+	}
+}
+
+.hljs ol,
+.hljs ul {
+	list-style: decimal;
+	margin: 0.5rem 0;
+	padding: 0 0 0 1rem;
+
+	.hljs li {
+		padding: 0 0 0 0.5rem;
+
+		.hljs ol,
+		.hljs ul {
+			margin-bottom: 0;
+
+			.hljs li {
+				font-size: 0.9rem;
+			}
+		}
+	}
+}
+
+.hljs p {
+	margin: 0.5rem 0;
+}
+
+.hljs img {
+	border-radius: 0.5rem;
+	border: solid 1px var(--border);
+	background-color: var(--bg);
+}
+
+.hljs .line-number {
+	text-align: right;
+	padding-right: 5px;
+	display: inline-block;
+	color: hsla(0, 0%, 0%, 0.5);
+	width: 30px;
+	font-size: 11px;
+	font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+/* Technique to disable line numbers from being selected and copied. 
+   Checkout this post for more details http://codepen.io/danoc/pen/ByGKZv */
+.hljs [data-pseudo-content]::before,
+.hljs [data-pseudo-content--before]::before,
+.hljs [data-pseudo-content--after]::after {
+	content: attr(data-pseudo-content);
+}
+
+.hljs .code-table {
+	width: 100%;
+}
+
+.hljs .code-table tbody tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+.hljs .code-table tbody tr:nth-child(even) {
+	background-color: #f4f4f4;
+}

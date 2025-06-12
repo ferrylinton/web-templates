@@ -8,6 +8,35 @@ hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 const { WEB_TEMPLATE_PATH } = require('../configs/constant');
 
+const createHighlightedCodeBlock = (content, language) => {
+	let lineNumber = 0;
+	const highlightedContent = hljs.highlightAuto(content, [language]).value;
+
+	/* Highlight.js wraps comment blocks inside <span class="hljs-comment"></span>.
+       However, when the multi-line comment block is broken down into diffirent
+       table rows, only the first row, which is appended by the <span> tag, is
+       highlighted. The following code fixes it by appending <span> to each line
+       of the comment block. */
+	const commentPattern = /<span class="hljs-comment">(.|\n)*?<\/span>/g;
+	const adaptedHighlightedContent = highlightedContent.replace(commentPattern, data => {
+		return data.replace(/\r?\n/g, () => {
+			return '\n<span class="hljs-comment">';
+		});
+	});
+
+	const contentTable = adaptedHighlightedContent
+		.split(/\r?\n/)
+		.map(lineContent => {
+			return `<tr>
+              <td class='line-number' data-pseudo-content=${++lineNumber}></td>
+              <td>${lineContent}</td>
+            </tr>`;
+		})
+		.join('');
+
+	return `<pre><code><table class='code-table'>${contentTable}</table></code></pre>`;
+};
+
 const getWebTemplateFolders = () => {
 	const templates = readdirSync(WEB_TEMPLATE_PATH, { withFileTypes: true })
 		.filter(folder => folder.isDirectory())
@@ -43,7 +72,8 @@ const getFileContent = filePath => {
 		let language = path.extname(filePath).replace('\.', '');
 		language = language === 'html' ? 'xml' : language;
 
-		return hljs.highlight(fileContent, { language }).value;
+		return createHighlightedCodeBlock(fileContent.replace(/\t/g, '  '), language);
+		//return hljs.highlight(fileContent, { language }).value;
 	} catch (error) {
 		return error.message;
 	}

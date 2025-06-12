@@ -15,21 +15,17 @@ const homeHandler = async (req, res, next) => {
 
 const templateViewFileHandler = async (req, res, next) => {
 	try {
-		let selected = null;
-
 		const { templateName, folderName, fileName } = req.params;
 
 		const filePath = path.resolve(WEB_TEMPLATE_PATH, templateName, folderName || '', fileName);
 		const pathName =
 			`/templates/${templateName}/` + (folderName ? `${folderName}/${fileName}` : fileName);
-		console.log(filePath);
-		console.log(pathName);
 
 		if (existsSync(filePath)) {
 			const fileContent = getFileContent(filePath);
-			res.render('detail-file', { pathName, fileContent });
+			res.render('detail-file', { templateName, pathName, fileContent });
 		} else {
-			res.render('detail-file', { message: 'Template is not found' });
+			res.render('detail-file', { templateName, message: 'Template is not found' });
 		}
 	} catch (error) {
 		next(error);

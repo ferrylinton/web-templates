@@ -8,7 +8,10 @@
     <meta name="author" content="Ferry L. H.">
     <link href="/favicon.ico" rel="icon" />
     <link href="/assets/css/normalize.css" rel="stylesheet" />
+    <link href="/assets/css/accordion.css" rel="stylesheet" />
+    <link href="/assets/css/tabs.css" rel="stylesheet" />
     <link href="/assets/css/github.css" rel="stylesheet" />
+    <link href="/assets/css/hljs.css" rel="stylesheet" />
     <link href="/assets/css/main.css" rel="stylesheet" />
 </head>
 
@@ -27,22 +30,36 @@
                 {{> close-icon}}
             </button>
         </header>
-        <section>
+
+        <section class="accordion">
+            <a class="link {{eqPathClass '/' currentPath}}" href="/">
+                <section>
+                    {{>home-icon}}
+                    <span>Home</span>
+                </section>
+            </a>
             {{templates }}
-            <ul id="sidebar-menu">
-                {{#each templates}}
-                <li>
-                    <a href="/detail/{{templateName}}" class="folder">{{templateName}}</a>
+            {{#each templates}}
+            <div class="accordion-tab">
+                <input type="radio" name="accordion" id="{{templateName}}" {{eqPathChecked templateName ../templateName}}>
+                <label for="{{templateName}}" class="accordion-tab-label link {{eqPathClass templateName ../templateName}}">
+                    <section>
+                        {{>folder-icon}}
+                        <span>{{templateName}}</span>
+                    </section>
+                </label>
+                <div class="accordion-content">
                     <ul>
                         {{#each files}}
-                        <li><a href="/detail/{{../templateName}}{{relativePath}}" class="file">{{relativePath}}</a></li>
+                        {{setVar "currentTemplatePath" (concat '/detail/' ../templateName relativePath)}}
+                        <li><a href="{{@root.currentTemplatePath}}" class="{{eqPathClass @root.currentTemplatePath @root.currentPath}}">{{relativePath}}</a></li>
                         {{/each}}
                     </ul>
-                </li>
-                {{/each}}
-            </ul>
-
+                </div>
+            </div>
+            {{/each}}
         </section>
+
     </aside>
     <main>
         {{{body}}}

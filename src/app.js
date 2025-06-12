@@ -19,12 +19,32 @@ const handlebars = create({
 			return num1 + num2;
 		},
 
-		templates: function (options) {
-			options.data.root['templates'] = getWebTemplateFolders();
+		setVar: function (varName, varValue, options) {
+			options.data.root[varName] = varValue;
 		},
 
-		tree: function (options) {
-			options.data.root['tree'] = getDirTree();
+		concat: function () {
+			var outStr = '';
+			for (var arg in arguments) {
+				if (typeof arguments[arg] != 'object') {
+					outStr += arguments[arg];
+				}
+			}
+			return outStr;
+		},
+
+		eqPathClass: function (arg1, arg2) {
+			console.log('eqPathClass ', arg1, arg2);
+			return arg1 === arg2 ? 'active' : '';
+		},
+
+		eqPathChecked: function (arg1, arg2) {
+			console.log('eqPathChecked ', arg1, arg2);
+			return arg1 === arg2 ? 'checked' : '';
+		},
+
+		templates: function (options) {
+			options.data.root['templates'] = getWebTemplateFolders();
 		},
 	},
 });
@@ -49,6 +69,11 @@ app.set('views', VIEWS_FOLDER);
 // parses incoming requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(function (req, res, next) {
+	res.locals.currentPath = req.path;
+	next();
+});
 
 // map router to express application
 app.use('/', homeRouter);
