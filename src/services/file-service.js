@@ -6,8 +6,6 @@ hljs.registerLanguage('xml', require('highlight.js/lib/languages/xml'));
 hljs.registerLanguage('javascript', require('highlight.js/lib/languages/javascript'));
 hljs.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
-const { WEB_TEMPLATE_PATH } = require('../configs/constant');
-
 const createHighlightedCodeBlock = (content, language) => {
 	let lineNumber = 0;
 	const highlightedContent = hljs.highlightAuto(content, [language]).value;
@@ -37,12 +35,12 @@ const createHighlightedCodeBlock = (content, language) => {
 	return `<pre><code><table class='code-table'>${contentTable}</table></code></pre>`;
 };
 
-const getWebTemplateFolders = () => {
-	const templates = readdirSync(WEB_TEMPLATE_PATH, { withFileTypes: true })
+const getWebTemplateFolders = webTemplatePath => {
+	const templates = readdirSync(webTemplatePath, { withFileTypes: true })
 		.filter(folder => folder.isDirectory())
 		.map(folder => {
 			const templateName = folder.name;
-			const templatePath = path.resolve(WEB_TEMPLATE_PATH, templateName);
+			const templatePath = path.resolve(webTemplatePath, templateName);
 
 			const files = readdirSync(templatePath, { withFileTypes: true, recursive: true })
 				.filter(file => file.isFile())

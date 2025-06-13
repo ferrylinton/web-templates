@@ -1,11 +1,10 @@
-const app = require('./src/app');
-const { NODE_ENV, PORT } = require('./src/configs/constant');
-
-console.log(NODE_ENV);
+const app = require('./app');
+const { NODE_ENV, PORT } = require('./configs/constant');
 
 (function () {
 	try {
 		app.listen(PORT, '0.0.0.0', () => {
+			console.log('[SERVER] NODE_ENV : ', NODE_ENV);
 			console.log(`[SERVER] Server is running at 'http://127.0.0.1:${PORT}'`);
 		});
 	} catch (error) {

@@ -2,8 +2,8 @@ const { statSync, readdirSync, readFileSync, createReadStream, existsSync } = re
 const path = require('path');
 const express = require('express');
 const archiver = require('archiver');
-const { WEB_TEMPLATE_PATH } = require('../configs/constant');
 const { getFileContent } = require('../services/file-service');
+const { WEB_TEMPLATE_FOLDER } = require('../configs/constant');
 
 const homeHandler = async (req, res, next) => {
 	try {
@@ -17,7 +17,12 @@ const templateViewFileHandler = async (req, res, next) => {
 	try {
 		const { templateName, folderName, fileName } = req.params;
 
-		const filePath = path.resolve(WEB_TEMPLATE_PATH, templateName, folderName || '', fileName);
+		const filePath = path.resolve(
+			WEB_TEMPLATE_FOLDER,
+			templateName,
+			folderName || '',
+			fileName
+		);
 		const pathName =
 			`/templates/${templateName}/` + (folderName ? `${folderName}/${fileName}` : fileName);
 
@@ -26,47 +31,6 @@ const templateViewFileHandler = async (req, res, next) => {
 			res.render('detail-file', { templateName, pathName, fileContent });
 		} else {
 			res.render('detail-file', { templateName, message: 'Template is not found' });
-		}
-	} catch (error) {
-		next(error);
-	}
-};
-
-const templateViewHandler = async (req, res, next) => {
-	try {
-		let selected = null;
-		const name = req.params.name;
-		console.log(name);
-
-		if (existsSync(path.resolve(WEB_TEMPLATE_PATH, name))) {
-			const filesByName = readdirSync(path.resolve(WEB_TEMPLATE_PATH, name)).filter(file =>
-				file.match(/.*\.(html?)/gi)
-			);
-
-			const files = filesByName.map((file, index) => {
-				if (file === 'index.html') {
-					selected = {
-						url: `/templates/${name}/${file}`,
-						index,
-					};
-				}
-
-				return {
-					url: `/templates/${name}/${file}`,
-					index,
-				};
-			});
-
-			const first = files[0];
-			const last = files[files.length - 1];
-
-			if (selected === null) {
-				selected = files[0];
-			}
-
-			res.render('detail', { files, first, last, selected, name });
-		} else {
-			res.render('detail', { message: 'Template is not found', name });
 		}
 	} catch (error) {
 		next(error);
@@ -99,9 +63,9 @@ const templateDownloadHandler = async (req, res, next) => {
 		// Pipe the archive to the response
 		archive.pipe(res);
 
-		const files = readdirSync(path.resolve(WEB_TEMPLATE_PATH, name), { recursive: true });
+		const files = readdirSync(path.resolve(WEB_TEMPLATE_FOLDER, name), { recursive: true });
 		for (let i = 0; i < files.length; i++) {
-			const filePath = path.resolve(WEB_TEMPLATE_PATH, name, files[i]);
+			const filePath = path.resolve(WEB_TEMPLATE_FOLDER, name, files[i]);
 			const stats = statSync(filePath);
 
 			if (stats.isFile()) {
@@ -123,8 +87,6 @@ const templateDownloadHandler = async (req, res, next) => {
 const router = express.Router();
 
 router.get('/', homeHandler);
-
-router.get('/detail/:name', templateViewHandler);
 
 router.get('/detail/:templateName/:fileName', templateViewFileHandler);
 

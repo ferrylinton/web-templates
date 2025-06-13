@@ -7,10 +7,11 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0.6rem 1rem;
+	padding: 0 1rem;
 	font-size: 1rem;
 	text-transform: uppercase;
 	font-weight: 300;
+	height: 40px;
 }
 
 .accordion .link.active {
@@ -34,8 +35,8 @@
 }
 
 .accordion .link svg {
-	width: 20px;
-	height: 20px;
+	width: 16px;
+	height: 16px;
 }
 
 .accordion .link section {
@@ -70,7 +71,7 @@
 }
 
 .accordion-content ul {
-	padding: 0 0 0 4rem;
+	padding: 0.2rem 0 0.2rem 4rem;
 	list-style-type: square;
 }
 

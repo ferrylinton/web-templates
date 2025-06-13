@@ -7,16 +7,24 @@
     <meta name="description" content="Simple HTML, CSS Template">
     <meta name="author" content="Ferry L. H.">
     <link href="/favicon.ico" rel="icon" />
-    <link href="/assets/css/normalize.css" rel="stylesheet" />
-    <link href="/assets/css/accordion.css" rel="stylesheet" />
-    <link href="/assets/css/tabs.css" rel="stylesheet" />
-    <link href="/assets/css/github.css" rel="stylesheet" />
-    <link href="/assets/css/hljs.css" rel="stylesheet" />
-    <link href="/assets/css/main.css" rel="stylesheet" />
+
+    {{#if (isProduction)}}
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+        <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet" />
+        <% } %>
+            {{else}}
+            <link href="/assets/css/normalize.css" rel="stylesheet" />
+            <link href="/assets/css/accordion.css" rel="stylesheet" />
+            <link href="/assets/css/tabs.css" rel="stylesheet" />
+            <link href="/assets/css/github.css" rel="stylesheet" />
+            <link href="/assets/css/hljs.css" rel="stylesheet" />
+            <link href="/assets/css/main.css" rel="stylesheet" />
+            {{/if}}
+
 </head>
 
 <body>
-    <button type="button" class="toggle-menu" onclick="toggleSidebar()">
+    <button type="button" class="toggle-menu" id="toggle-menu" onclick="window.toggleSidebar()">
         {{> menu-icon}}
     </button>
     <aside class="sidebar">
@@ -26,7 +34,7 @@
             </h1>
             <h2>Web Templates</h2>
 
-            <button type="button" onclick="toggleSidebar()">
+            <button type="button" onclick="window.toggleSidebar()">
                 {{> close-icon}}
             </button>
         </header>
@@ -41,8 +49,10 @@
             {{templates }}
             {{#each templates}}
             <div class="accordion-tab">
-                <input type="radio" name="accordion" id="{{templateName}}" {{eqPathChecked templateName ../templateName}}>
-                <label for="{{templateName}}" class="accordion-tab-label link {{eqPathClass templateName ../templateName}}">
+                <input type="radio" name="accordion" id="{{templateName}}" {{eqPathChecked templateName
+                    ../templateName}}>
+                <label for="{{templateName}}"
+                    class="accordion-tab-label link {{eqPathClass templateName ../templateName}}">
                     <section>
                         {{>folder-icon}}
                         <span>{{templateName}}</span>
@@ -52,7 +62,9 @@
                     <ul>
                         {{#each files}}
                         {{setVar "currentTemplatePath" (concat '/detail/' ../templateName relativePath)}}
-                        <li><a href="{{@root.currentTemplatePath}}" class="{{eqPathClass @root.currentTemplatePath @root.currentPath}}">{{relativePath}}</a></li>
+                        <li><a href="{{@root.currentTemplatePath}}"
+                                class="{{eqPathClass @root.currentTemplatePath @root.currentPath}}">{{relativePath}}</a>
+                        </li>
                         {{/each}}
                     </ul>
                 </div>
@@ -64,8 +76,18 @@
     <main>
         {{{body}}}
     </main>
-    <div class="overlay" onclick="toggleSidebar()"></div>
-    <script src="/assets/js/main.js" defer="defer"></script>
+    <div class="overlay" onclick="window.toggleSidebar()"></div>
+
+    {{#if (isProduction)}}
+    <% for (var js in htmlWebpackPlugin.files.js) { %>
+        <script src="<%= htmlWebpackPlugin.files.js[js] %>" defer="defer"></script>
+        <% } %>
+            {{else}}
+            <script src="/assets/js/main.js" defer="defer"></script>
+            {{/if}}
+
+
+
 </body>
 
 </html>

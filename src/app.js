@@ -3,8 +3,8 @@ const express = require('express');
 const favicon = require('express-favicon');
 const { create } = require('express-handlebars');
 const homeRouter = require('./routers/home-router');
-const { WEB_TEMPLATE_PATH } = require('./configs/constant');
-const { getWebTemplateFolders, getDirTree } = require('./services/file-service');
+const { getWebTemplateFolders } = require('./services/file-service');
+const { NODE_ENV, WEB_TEMPLATE_FOLDER } = require('./configs/constant');
 
 const VIEWS_FOLDER = path.join(__dirname, 'views');
 
@@ -33,18 +33,20 @@ const handlebars = create({
 			return outStr;
 		},
 
+		isProduction: function () {
+			return NODE_ENV === 'production';
+		},
+
 		eqPathClass: function (arg1, arg2) {
-			console.log('eqPathClass ', arg1, arg2);
 			return arg1 === arg2 ? 'active' : '';
 		},
 
 		eqPathChecked: function (arg1, arg2) {
-			console.log('eqPathChecked ', arg1, arg2);
 			return arg1 === arg2 ? 'checked' : '';
 		},
 
 		templates: function (options) {
-			options.data.root['templates'] = getWebTemplateFolders();
+			options.data.root['templates'] = getWebTemplateFolders(WEB_TEMPLATE_FOLDER);
 		},
 	},
 });
@@ -59,7 +61,7 @@ app.use(favicon(path.join(__dirname, 'favicon.ico')));
 
 // set assets url
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-app.use('/templates', express.static(WEB_TEMPLATE_PATH));
+app.use('/templates', express.static(WEB_TEMPLATE_FOLDER));
 
 // Handlebars config
 app.engine('.hbs', handlebars.engine);
@@ -72,6 +74,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(function (req, res, next) {
 	res.locals.currentPath = req.path;
+	res.locals.NODE_ENV = NODE_ENV;
 	next();
 });
 
