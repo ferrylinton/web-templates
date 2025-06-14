@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{locale}}">
 
 <head>
     <meta charset="utf-8">
@@ -13,12 +13,7 @@
         <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet" />
         <% } %>
             {{else}}
-            <link href="/assets/css/normalize.css" rel="stylesheet" />
-            <link href="/assets/css/accordion.css" rel="stylesheet" />
-            <link href="/assets/css/tabs.css" rel="stylesheet" />
-            <link href="/assets/css/github.css" rel="stylesheet" />
-            <link href="/assets/css/hljs.css" rel="stylesheet" />
-            <link href="/assets/css/main.css" rel="stylesheet" />
+            <link href="/assets/css/index.css" rel="stylesheet" />
             {{/if}}
 
 </head>
@@ -38,12 +33,30 @@
                 {{> close-icon}}
             </button>
         </header>
+        <div class="header-menu">
+            <div class="dropdown">
+                <input type="checkbox" id="dropdown-trigger-input">
+                <label class="dropdown-trigger" for="dropdown-trigger-input">
+                    <img src="/assets/image/{{locale}}.png" />
+                    <span>{{#if (eq locale "en")}} English {{else}} Indonesia {{/if}}</span>
+                    <span class="arrow-down"></span>
+                </label>
+                <ul class="dropdown-content" id="dropdown-content">
+                    <li>
+                        <a href="?lang=id" class="{{#if (eq locale "id")}}selected{{/if}}"><img src="/assets/image/id.png" /><span>Indonesia</span></a>
+                    </li>
+                    <li>
+                        <a href="?lang=en" class="{{#if (eq locale "en")}}selected{{/if}}"><img src="/assets/image/en.png" /><span>English</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
         <section class="accordion">
             <a class="link {{eqPathClass '/' currentPath}}" href="/">
                 <section>
                     {{>home-icon}}
-                    <span>Home</span>
+                    <span>{{t 'home'}}</span>
                 </section>
             </a>
             {{templates }}
