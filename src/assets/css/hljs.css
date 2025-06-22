@@ -2,6 +2,63 @@
 	font-size: 0.8rem;
 	line-height: 1.2;
 	overflow: auto;
+	position: relative;
+}
+
+.hljs .btn-copy {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 30%;
+	cursor: pointer;
+
+	&:hover {
+		background-color: hsla(0, 0%, 87%, 0.5);
+		backdrop-filter: blur(5px);
+		opacity: 1;
+	}
+}
+
+.hljs .lbl-copy {
+	position: absolute;
+	top: 10px;
+	right: 50px;
+	color: green;
+	visibility: hidden;
+	opacity: 0;
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+	border-radius: 0.2rem;
+	text-shadow: hsl(0, 0%, 50%) 1px 1px 0;
+
+	&.show {
+		visibility: visible;
+		opacity: 1;
+		animation: bounce 2s ease infinite;
+	}
+}
+
+@keyframes bounce {
+	0%,
+	20%,
+	50%,
+	80%,
+	100% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(-10px);
+	}
+	60% {
+		transform: translateY(-5px);
+	}
 }
 
 .hljs h1,
@@ -88,9 +145,8 @@
 
 .hljs .line-number {
 	text-align: right;
-	padding-right: 5px;
-	display: inline-block;
-	color: hsla(0, 0%, 0%, 0.5);
+	padding: 0 15px;
+	color: var(--light-text);
 	width: 30px;
 	font-size: 11px;
 	font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
@@ -109,9 +165,9 @@
 }
 
 .hljs .code-table tbody tr:nth-child(odd) {
-	background-color: #fff;
+	background-color: var(--odd-bg);
 }
 
 .hljs .code-table tbody tr:nth-child(even) {
-	background-color: #f4f4f4;
+	background-color: var(--even-bg);
 }

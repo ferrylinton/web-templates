@@ -1,0 +1,56 @@
+:root {
+	--sidebar-width: 300px;
+
+	--spacing: 0.25rem;
+	--base1-h: 210;
+	--base1-s: 15%;
+	--base2-h: 210;
+	--base2-s: 5%;
+
+	--primary1-h: 200;
+	--primary1-s: 90%;
+	--primary2-h: 230;
+	--primary2-s: 90%;
+
+	--danger1-h: 0;
+	--danger1-s: 80%;
+	--danger2-h: 5;
+	--danger2-s: 90%;
+
+	--placeholder: hsl(var(--base1-h), var(--base1-s), 90%);
+	--primary-outline: hsl(var(--primary1-h), var(--primary1-s), 70%, 0.3);
+	--primary: hsl(var(--primary1-h), var(--primary1-s), 35%);
+	--darker-primary: hsl(var(--primary1-h), var(--primary1-s), 30%);
+}
+
+:root {
+	--bg: #fff;
+	--light-bg: hsl(var(--base-50), 1);
+	--transparant-bg: hsl(var(--base-500), 0.1);
+	--overlay-bg: hsl(var(--base-100), 0.1);
+	--odd-bg: var(--bg);
+	--even-bg: hsl(var(--base-50));
+
+	--text: hsl(var(--base-950));
+	--light-text: hsl(var(--base-400));
+	--inverse-text: hsl(var(--base-50));
+	--border: hsl(var(--base-100));
+	--primary: hsl(var(--primary-600));
+	--light-primary: hsl(var(--primary-50));
+}
+
+.dark {
+	--bg: hsl(var(--base-950));
+	--light-bg: hsl(var(--base-900));
+	--transparant-bg: hsl(var(--base-50), 0.1);
+	--overlay-bg: hsl(var(--base-950), 0.1);
+	--odd-bg: var(--bg);
+	--even-bg: hsl(var(--base-900));
+
+	--text: hsl(var(--base-50));
+	--light-text: hsl(var(--base-500));
+	--inverse-text: hsl(var(--base-50));
+	--border: hsl(var(--base-700));
+	--primary: hsl(var(--primary-600));
+	--light-primary: hsl(var(--primary-800));
+}

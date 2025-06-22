@@ -2,6 +2,14 @@
 	padding: 1rem 0;
 }
 
+.accordion h5 {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	font-weight: 500;
+	padding: 0.5rem 1rem;
+	color: var(--light-text);
+}
+
 .accordion .link {
 	cursor: pointer;
 	display: flex;
@@ -9,19 +17,14 @@
 	align-items: center;
 	padding: 0 1rem;
 	font-size: 1rem;
-	text-transform: uppercase;
+	text-transform: capitalize;
 	font-weight: 300;
 	height: 40px;
 }
 
-.accordion .link.active {
+.accordion .link:hover {
 	background-color: var(--light-primary);
 	color: var(--primary);
-}
-
-.accordion .link:hover {
-	color: var(--primary);
-	font-weight: 500;
 }
 
 .accordion-tab-label::after {
@@ -53,6 +56,7 @@
 .accordion-tab input {
 	position: absolute;
 	opacity: 0;
+	visibility: hidden;
 	z-index: -1;
 }
 
@@ -62,25 +66,46 @@
 	transition: all 0.35s;
 }
 
+.accordion .link.active,
+.accordion-tab:has(.active) .link {
+	color: var(--primary);
+	font-weight: bold;
+}
+
+.accordion-tab:has(.active) .accordion-content,
 .accordion-tab input:checked ~ .accordion-content {
 	max-height: none;
 }
 
+.accordion-tab:has(.active) .accordion-tab-label::after,
 .accordion-tab input:checked + .accordion-tab-label::after {
 	transform: rotate(270deg);
 }
 
 .accordion-content ul {
-	padding: 0.2rem 0 0.2rem 4rem;
-	list-style-type: square;
+	padding: 0;
 }
 
 .accordion-content ul li {
-	list-style: circle;
-}
+	list-style: none;
+	position: relative;
+	height: 35px;
+	padding: 0 0 0 3rem;
 
-.accordion-content ul li::marker {
-	color: red;
+	&::before {
+		position: absolute;
+		content: ' ';
+		top: -18px;
+		left: 25px;
+		width: 20px;
+		height: 35px;
+		border: dashed 1px var(--text);
+		border-width: 0 0 1px 1px;
+	}
+
+	&:hover {
+		background-color: var(--light-primary);
+	}
 }
 
 .accordion-content ul li a {
@@ -93,19 +118,4 @@
 .accordion-content ul li a.active {
 	color: var(--primary);
 	font-weight: bold;
-}
-
-/* Arrow animation */
-.accordion-tab input:not(:checked) + .accordion-tab-label:hover::after {
-	animation: bounce 0.5s infinite;
-}
-
-@keyframes bounce {
-	25% {
-		transform: rotate(90deg) translate(0.25rem);
-	}
-
-	75% {
-		transform: rotate(90deg) translate(-0.25rem);
-	}
 }

@@ -1,5 +1,5 @@
-{{#if pathName}}
-<div class="main-content">
+<div class="content">
+    {{#if pathName}}
     <div class="tabs">
         <input type="radio" name="tabs" id="tab-nav-1" checked>
         <label for="tab-nav-1">Code</label>
@@ -7,7 +7,7 @@
         <label for="tab-nav-2">Preview</label>
         <div class="tab-content">
             <div class="hljs">
-                <pre><code>{{{fileContent}}}</code></pre>
+                {{{fileContent}}}
             </div>
             <div class="detail-preview-wrapper">
                 <div class="detail-preview">
@@ -24,17 +24,17 @@
             </div>
         </div>
     </div>
-</div>
-{{else}}
-<div class="detail-header">
-    <h1>
-        <a href="/">{{> home-icon}}</a>
-        <span>{{name}}</span>
-    </h1>
-</div>
-<div class="detail-preview">
-    <div class="detail-message">
-        <p>{{message}}</p>
+    {{else}}
+    <div class="detail-header">
+        <h1>
+            <a href="/">{{> home-icon}}</a>
+            <span>{{name}}</span>
+        </h1>
     </div>
+    <div class="detail-preview">
+        <div class="detail-message">
+            <p>{{message}}</p>
+        </div>
+    </div>
+    {{/if}}
 </div>
-{{/if}}

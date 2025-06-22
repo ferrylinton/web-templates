@@ -1,5 +1,7 @@
+@import 'variable.css';
 @import 'normalize.css';
 @import 'accordion.css';
+@import 'theme-toggle.css';
 @import 'tabs.css';
 @import 'github.css';
 @import 'hljs.css';

@@ -1,4 +1,6 @@
 {
 	"logo": "Web Templates",
-	"home": "Home"
+	"home": "Home",
+	"light": "Light",
+	"dark": "Dark"
 }

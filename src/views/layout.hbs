@@ -8,6 +8,11 @@
     <meta name="author" content="Ferry L. H.">
     <link href="/favicon.ico" rel="icon" />
 
+    <style type="text/css">
+        {{{lightVariables}}}
+        {{{darkVariables}}}
+    </style>
+
     {{#if (isProduction)}}
     <% for (var css in htmlWebpackPlugin.files.css) { %>
         <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet" />
@@ -18,7 +23,7 @@
 
 </head>
 
-<body>
+<body class="{{theme}}">
     <button type="button" class="toggle-menu" id="toggle-menu" onclick="window.toggleSidebar()">
         {{> menu-icon}}
     </button>
@@ -34,22 +39,8 @@
             </button>
         </header>
         <div class="header-menu">
-            <div class="dropdown">
-                <input type="checkbox" id="dropdown-trigger-input">
-                <label class="dropdown-trigger" for="dropdown-trigger-input">
-                    <img src="/assets/image/{{locale}}.png" />
-                    <span>{{#if (eq locale "en")}} English {{else}} Indonesia {{/if}}</span>
-                    <span class="arrow-down"></span>
-                </label>
-                <ul class="dropdown-content" id="dropdown-content">
-                    <li>
-                        <a href="?lang=id" class="{{#if (eq locale "id")}}selected{{/if}}"><img src="/assets/image/id.png" /><span>Indonesia</span></a>
-                    </li>
-                    <li>
-                        <a href="?lang=en" class="{{#if (eq locale "en")}}selected{{/if}}"><img src="/assets/image/en.png" /><span>English</span></a>
-                    </li>
-                </ul>
-            </div>
+            {{> language-menu}}
+            {{> theme-toggle}}
         </div>
 
         <section class="accordion">
@@ -59,13 +50,33 @@
                     <span>{{t 'home'}}</span>
                 </section>
             </a>
+            <div class="accordion-tab">
+                <input type="checkbox" name="theme" id="theme" {{eqPathChecked '/theme' currentPath}}>
+                <label for="theme" class="accordion-tab-label link">
+                    <section>
+                        {{>folder-icon}}
+                        <span>{{t 'theme'}}</span>
+                    </section>
+                </label>
+                <div class="accordion-content">
+                    <ul>
+                        <li>
+                            <a href="/theme/light" class="{{eqPathClass "/theme/light" @root.currentPath}}">{{t
+                                'light'}}</a>
+                        </li>
+                        <li>
+                            <a href="/theme/dark" class="{{eqPathClass "/theme/dark" @root.currentPath}}">{{t
+                                'dark'}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <h5>Templates</h5>
             {{templates }}
             {{#each templates}}
             <div class="accordion-tab">
-                <input type="radio" name="accordion" id="{{templateName}}" {{eqPathChecked templateName
-                    ../templateName}}>
-                <label for="{{templateName}}"
-                    class="accordion-tab-label link {{eqPathClass templateName ../templateName}}">
+                <input type="checkbox" name="accordion" id="{{templateName}}">
+                <label for="{{templateName}}" class="accordion-tab-label link">
                     <section>
                         {{>folder-icon}}
                         <span>{{templateName}}</span>
@@ -86,7 +97,7 @@
         </section>
 
     </aside>
-    <main>
+    <main class="main">
         {{{body}}}
     </main>
     <div class="overlay" onclick="window.toggleSidebar()"></div>

@@ -12,10 +12,10 @@ const createHighlightedCodeBlock = (content, language) => {
 	const highlightedContent = hljs.highlightAuto(content, [language]).value;
 
 	/* Highlight.js wraps comment blocks inside <span class="hljs-comment"></span>.
-       However, when the multi-line comment block is broken down into diffirent
-       table rows, only the first row, which is appended by the <span> tag, is
-       highlighted. The following code fixes it by appending <span> to each line
-       of the comment block. */
+	   However, when the multi-line comment block is broken down into diffirent
+	   table rows, only the first row, which is appended by the <span> tag, is
+	   highlighted. The following code fixes it by appending <span> to each line
+	   of the comment block. */
 	const commentPattern = /<span class="hljs-comment">(.|\n)*?<\/span>/g;
 	const adaptedHighlightedContent = highlightedContent.replace(commentPattern, data => {
 		return data.replace(/\r?\n/g, () => {
@@ -74,7 +74,14 @@ const getFileContent = filePath => {
 		language = language === 'html' ? 'xml' : language;
 
 		return createHighlightedCodeBlock(fileContent.replace(/\t/g, '  '), language);
-		//return hljs.highlight(fileContent, { language }).value;
+	} catch (error) {
+		return error.message;
+	}
+};
+
+const highlightCss = css => {
+	try {
+		return createHighlightedCodeBlock(css, 'css');
 	} catch (error) {
 		return error.message;
 	}
@@ -83,4 +90,5 @@ const getFileContent = filePath => {
 module.exports = {
 	getWebTemplateFolders,
 	getFileContent,
+	highlightCss,
 };

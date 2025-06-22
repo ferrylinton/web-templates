@@ -1,0 +1,37 @@
+<div class="main-content">
+    <div class="container center">
+        <div class="color-list">
+            <div class="color-group">
+                <div class="color-item">
+                    <label>#</label>
+                </div>
+                {{#each variants}}
+                <div class="color-item">
+                    <label>{{ this }}</label>
+                </div>
+                {{/each}}
+            </div>
+
+            {{#each light}}
+            <div class="color-group">
+                <div class="color-item">
+                    <label class="center">{{ @key }}</label>
+                </div>
+                {{#each this}}
+                <div class="color-item">
+                    <span style="background-color: {{this}};"></span>
+                </div>
+                {{/each}}
+            </div>
+            {{/each}}
+
+        </div>
+        <div class="css-variables hljs">
+            <button type="button" class="btn-copy" onclick="window.copyTextToClipboard(this, `{{lightVariables}}`)">
+                {{> copy-icon}}
+            </button>
+            <label class="lbl-copy">copied</label>
+            <pre><code>{{{formattedLightVariables}}}</code></pre>
+        </div>
+    </div>
+</div>

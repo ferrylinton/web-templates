@@ -1,28 +1,25 @@
 .dropdown {
 	position: relative;
-}
 
-#dropdown-trigger-input {
-	position: absolute;
-	opacity: 0;
-	z-index: -1;
+	& input {
+		position: absolute;
+		visibility: hidden;
+		opacity: 0;
+	}
 }
 
 .dropdown-trigger {
-	min-width: 130px;
+	min-width: 150px;
 	width: max-content;
 	height: 40px;
 	border-radius: 5px;
 	padding: 10px;
 	cursor: pointer;
 	display: flex;
+	gap: 0.5rem;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-between;
 	border: solid 1px var(--border);
-}
-
-.dropdown-trigger img {
-	margin: 0 5px 0 0;
 }
 
 .dropdown-trigger img,
@@ -31,22 +28,34 @@
 	height: auto;
 }
 
+.arrow {
+	width: 20px;
+	height: 20px;
+	line-height: 18px;
+	text-align: center;
+	transform: rotate(90deg);
+	transition: all 0.35s;
+}
 .arrow-down {
 	width: 0;
 	height: 0;
 	display: inline-block;
 	vertical-align: middle;
 	border-style: solid;
-	border-width: 4px 4px 0 4px;
+	border-width: 5px 5px 0 5px;
 	border-color: var(--text) transparent transparent transparent;
 	margin: 0 0 0 5px;
 }
 
-.dropdown-trigger:hover,
-.dropdown:focus-within .dropdown-trigger {
+.dropdown:has(input:checked) .dropdown-trigger,
+.dropdown-trigger:hover {
 	cursor: pointer;
 	background-color: var(--primary);
-	color: #fff;
+	color: var(--inverse-text);
+
+	.arrow-down {
+		border-color: var(--inverse-text) transparent transparent transparent;
+	}
 }
 
 .dropdown-content {
@@ -54,12 +63,12 @@
 	display: none;
 	position: absolute;
 	padding: 0.5rem 0;
-	background-color: #fff;
 	min-width: 160px;
-	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	border-radius: 0.2rem;
-	border: solid 1px #ddd;
 	z-index: 1;
+	background-color: var(--bg);
+	border: solid 1px var(--border);
+	box-shadow: 0px 8px 16px 0px hsla(0, 0%, 0%, 0.2);
 }
 
 .dropdown-content li a {
@@ -73,7 +82,7 @@
 }
 
 .dropdown-content li a:hover {
-	background-color: #f1f1f1;
+	background-color: var(--light-primary);
 }
 
 .dropdown-content li a.selected {
@@ -81,7 +90,7 @@
 	color: var(--primary);
 }
 
-#dropdown-trigger-input:checked ~ .dropdown-content {
+.dropdown:has(input:checked) .dropdown-content {
 	display: block;
 }
 
@@ -100,15 +109,4 @@
 
 .dropdown-content {
 	animation: slideIn 0.3s ease-out;
-}
-
-/* Scrollbar styles */
-::-webkit-scrollbar {
-	width: 8px;
-	height: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 8px;
-	background: #c2c9d2;
 }
